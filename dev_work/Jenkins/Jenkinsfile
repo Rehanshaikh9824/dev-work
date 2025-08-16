@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/<your-user>/devops-todo-api-pipeline.git'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t <dockerhub-user>/todo-api:latest ./app'
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    sh 'echo $PASS | docker login -u $USER --password-stdin'
+                    sh 'docker push <dockerhub-user>/todo-api:latest'
+                }
+            }
+        }
+        stage('Deploy with Ansible') {
+            steps {
+                sh 'ansible-playbook ansible/deploy.yaml'
+            }
+        }
+    }
+}
