@@ -1,0 +1,8 @@
+image:
+  repository: <dockerhub-user>/todo-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
