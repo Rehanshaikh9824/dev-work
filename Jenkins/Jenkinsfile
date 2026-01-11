@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/<your-user>/devops-todo-api-pipeline.git'
+                git 'https://github.com/Rehanshaikh9824/devops-todo-api-pipeline.git'
             }
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t <dockerhub-user>/todo-api:latest ./app'
+                sh 'docker build -t rehanshaikh7467/todo-api:latest ./app'
             }
         }
         stage('Push Docker Image') {
@@ -25,4 +25,5 @@ pipeline {
             }
         }
     }
+
 }
