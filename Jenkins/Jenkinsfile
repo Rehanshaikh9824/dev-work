@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Rehanshaikh9824/devops-todo-api-pipeline.git'
+                git url 'https://github.com/<git-username>/devops-todo-api-pipeline.git', branch : '<branchname>'
             }
         }
         stage('Build Docker Image') {
@@ -27,3 +27,4 @@ pipeline {
     }
 
 }
+
